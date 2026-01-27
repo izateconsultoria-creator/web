@@ -28,11 +28,9 @@
         <li><a href="que-hacemos.html">Qué Hacemos</a></li>
         <li><a href="contacto.html">Contacto</a></li>
     </ul>
- <!-- CTA SOLO MENÚ MÓVIL -->
     <button id="openModalMobile" class="cta-button nav-cta">
         Cuéntanos tu caso
     </button>
-    <!-- BLOQUE INFERIOR SOLO MENÚ MÓVIL -->
     <div class="nav-footer">
     <div class="nav-socials">
         <a href="https://instagram.com/tuperfil" target="_blank" aria-label="Instagram">
@@ -62,16 +60,14 @@
     </button>
 </div>
 
-
-
     <button class="menu-toggle" id="menuOpen"><span></span><span></span><span></span></button>
 </header>
 
 <main class="container">
-    <h1 class="section-title">Quiénes Somos</h1>
+    <h1 class="section-title animate">Quiénes Somos</h1>
     
     <section class="team-grid">
-        <div class="team-member">
+        <div class="team-member animate from-bottom">
             <div class="member-photo">
                 <div class="photo-placeholder tecnico">FOTO TÉCNICO</div>
             </div>
@@ -82,10 +78,9 @@
             </div>
         </div>
 
-        <div class="team-member">
+        <div class="team-member animate from-bottom">
             <div class="member-photo">
                 <div class="photo-placeholder abogado">FOTO ABOGADO</div>
-
             </div>
             <div class="member-info">
                 <h2>Luis García González</h2>
@@ -95,12 +90,10 @@
         </div>
     </section>
 
- <!-- NUEVO MODAL PARA QUIENES SOMOS -->
         <div id="contactModal" class="modal">
             <div class="modal-content">
                 <span class="close-modal" id="closeModal">&times;</span>
                 <h2>Contacto</h2>
-               <!-- FORMULARIO -->
         <form id="contactForm" class="main-form">
             <input type="text" name="nombre" placeholder="Nombre completo" required>
             <input type="email" name="email" placeholder="Correo electrónico" required>
@@ -116,7 +109,6 @@
             <button type="submit" class="submit-btn">ENVIAR</button>
         </form>
 
-        <!-- MENSAJE DE ÉXITO -->
         <div id="formSuccess" class="form-success">
             <h3>¡Consulta enviada!</h3>
             <p>Gracias por contactarnos. Te responderemos lo antes posible.</p>
@@ -125,8 +117,10 @@
     </div>
 </div>
 </main>
-    <footer class="footer"><p>Cantabria | info@izate.es</p>
-        <p>&copy; 2024 Izate Consulting 360</p></footer>
+    <footer class="footer animate">
+        <p>Cantabria | info@izate.es</p>
+        <p>&copy; 2024 Izate Consulting 360</p>
+    </footer>
     <script src="main.js"></script>
 </body>
 </html>

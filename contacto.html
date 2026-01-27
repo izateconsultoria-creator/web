@@ -20,18 +20,16 @@
     </div>
 
     <nav class="nav-sidebar" id="navSidebar">
-        <button class="close-btn" id="menuClose">&times;</button>
+        <button class="close-btn" id="menuClose">×</button>
         <ul>
             <li><a href="index.html">Inicio</a></li>
             <li><a href="quienes-somos.html">Quiénes Somos</a></li>
             <li><a href="que-hacemos.html">Qué Hacemos</a></li>
             <li><a href="contacto.html">Contacto</a></li>
         </ul>
-        <!-- CTA SOLO MENÚ MÓVIL -->
         <button id="openModalMobile" class="cta-button nav-cta">
             Cuéntanos tu caso
         </button>
-        <!-- BLOQUE INFERIOR SOLO MENÚ MÓVIL -->
         <div class="nav-footer">
             <div class="nav-socials">
                 <a href="https://instagram.com/tuperfil" target="_blank" aria-label="Instagram">
@@ -64,34 +62,34 @@
 </header>
 
 <main class="container">
-    <h1>Contacto</h1>
-    <div class="contacto-introduccion">
+    <h1 class="animate">Contacto</h1>
+    
+    <div class="contacto-introduccion animate">
         <p>Si necesitas asesoramiento técnico o jurídico, o tienes una duda sobre tu patrimonio, estamos aquí para ayudarte. Cuéntanos tu caso y nos pondremos en contacto contigo a la mayor brevedad.</p>
     </div>
     
     <section class="contacto-layout">
-      <div class="contacto-formulario">
-    <form id="contactPageForm" class="main-form">
-        <input type="text" name="name" placeholder="Nombre completo" required>
-        <input type="email" name="email" placeholder="Email" required>
-        <select name="type" required>
-            <option value="" disabled selected>Tipo de duda</option>
-            <option value="juridica">Duda Jurídica</option>
-            <option value="tecnica">Duda Técnica</option>
-            <option value="360">Consultoría 360</option>
-        </select>
-        <textarea name="message" placeholder="¿En qué podemos ayudarte?" rows="6" required></textarea>
-        <button type="submit" class="submit-btn">ENVIAR CONSULTA</button>
-    </form>
+        <div class="contacto-formulario animate from-bottom">
+            <form id="contactPageForm" class="main-form">
+                <input type="text" name="name" placeholder="Nombre completo" required>
+                <input type="email" name="email" placeholder="Email" required>
+                <select name="type" required>
+                    <option value="" disabled selected>Tipo de duda</option>
+                    <option value="juridica">Duda Jurídica</option>
+                    <option value="tecnica">Duda Técnica</option>
+                    <option value="360">Consultoría 360</option>
+                </select>
+                <textarea name="message" placeholder="¿En qué podemos ayudarte?" rows="6" required></textarea>
+                <button type="submit" class="submit-btn">ENVIAR CONSULTA</button>
+            </form>
 
-    <div id="contactPageSuccess" class="form-success" style="display:none;">
-        <h3>¡Consulta enviada!</h3>
-        <p>Gracias por contactarnos. Te responderemos lo antes posible.</p>
-    </div>
-</div>
+            <div id="contactPageSuccess" class="form-success" style="display:none;">
+                <h3>¡Consulta enviada!</h3>
+                <p>Gracias por contactarnos. Te responderemos lo antes posible.</p>
+            </div>
+        </div>
 
-
-        <div class="contacto-foto">
+        <div class="contacto-foto animate from-bottom">
             <div class="map-container">
                 <iframe
                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d372675.84203500405!2d-4.330338654569419!3d43.135398343851!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd4920db090ebfcb%3A0x104f58273c9c8d0!2sCantabria!5e0!3m2!1ses!2ses!4v1768815251213!5m2!1ses!2ses"
@@ -101,10 +99,9 @@
         </div>
     </section>
 
-    <!-- NUEVO MODAL PARA CONTACTO -->
     <div id="contactModal" class="modal">
         <div class="modal-content">
-            <span class="close-modal" id="closeModal">&times;</span>
+            <span class="close-modal" id="closeModal">×</span>
             <h3>Contacto</h3>
             <form id="contactForm" class="main-form">
                 <input type="text" name="nombre" placeholder="Nombre completo" required>
@@ -119,7 +116,6 @@
                 <button type="submit" class="submit-btn">ENVIAR</button>
             </form>
 
-            <!-- MENSAJE DE ÉXITO MODAL -->
             <div id="formSuccess" class="form-success" style="display:none;">
                 <h3>¡Consulta enviada!</h3>
                 <p>Gracias por contactarnos. Te responderemos lo antes posible.</p>
@@ -128,9 +124,9 @@
     </div>
 </main>
 
-<footer class="footer">
+<footer class="footer animate">
     <p>Cantabria | info@izate.es</p>
-    <p>&copy; 2024 Izate Consulting 360</p>
+    <p>© 2024 Izate Consulting 360</p>
 </footer>
 
 <script src="main.js"></script>

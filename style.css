@@ -1,0 +1,963 @@
+/* =========================================
+   1. RESET Y ESTILOS BASE
+   ========================================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html, body {
+    height: 100%;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    line-height: 1.6;
+    color: #1C2E4A;
+    background-color: #f8f8f8;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1 0 auto;
+    display: flex;
+    flex-direction: column;
+}
+
+h1, h2, h3, .cta-button {
+    font-family: 'Cabin', sans-serif;
+    color: #2F4853;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+h1, .section-title {
+    text-align: center;
+    margin-bottom: 0.3rem;
+    width: 100%;
+}
+
+
+
+
+
+/* =========================================
+   2. HEADER Y NAVEGACIÓN (Base Móvil)
+   ========================================= */
+
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 5%;
+    border-bottom: 1px solid #eee;
+    background: #fff;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+/* SE AGREGO CTA SOLO PARA ENCABEZADO */
+.header .header-cta {
+    margin-top: 0;
+    padding: 0.6rem 1.2rem;
+    font-size: 0.85rem;
+    line-height: 1;
+    align-self: center;
+}
+
+.logo {
+    max-height: 50px;
+}
+
+/* HAMBURGUESA ANIMADA */
+.menu-toggle {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 2001;
+    padding: 5px;
+}
+
+.menu-toggle span {
+    width: 30px;
+    height: 3px;
+    background: #333;
+    transition: 0.3s;
+}
+
+.menu-toggle.active span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+.menu-toggle.active span:nth-child(2) { opacity: 0; }
+.menu-toggle.active span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+/* MENU LATERAL */
+.nav-sidebar {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 280px;
+    height: 100%;
+    background: #f4f4f4;
+    z-index: 2000;
+    transition: 0.3s ease-in-out;
+    padding: 5rem 2rem 2rem;
+    box-shadow: -2px 0 5px rgba(0,0,0,0.1);
+}
+
+.nav-sidebar.active {
+    right: 0;
+}
+
+.nav-sidebar ul {
+    list-style: none;
+}
+
+.nav-sidebar ul li {
+    margin: 2.2rem 0;
+}
+
+.nav-sidebar ul li a {
+    position: relative;
+    text-decoration: none;
+    color:  #2F4853;
+    font-weight: 900;
+    font-size:  1.16rem;
+}
+
+.close-btn {
+    display: none; /* Se utiliza la hamburguesa animada */
+}
+
+.social-links {
+    display: none; /* Oculto en móvil */
+}
+
+
+
+
+
+/* =========================================
+   3. ELEMENTOS COMUNES Y COMPONENTES
+   ========================================= */
+
+    
+.photo-placeholder {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    background-color: #f0f0f000;
+    border: 2px dashed #bbb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    padding: 20px;
+    font-weight: bold;
+    /* fondo imagen */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 6px;
+}
+
+/* CUANDO HAY FOTO → NO MOSTRAR TEXTO NI FONDO */
+.photo-placeholder.tecnico,
+.photo-placeholder.abogado {
+    color: transparent;        /* oculta “FOTO TÉCNICO / ABOGADO” */
+    background-color: transparent;
+    border: none;              /* opcional, quita línea punteada */
+}
+
+/* IMÁGENES DE PERFIL EN QUIENES SOMOS*/
+.photo-placeholder.tecnico {
+    background-image: url("https://res.cloudinary.com/degqhlfa0/image/upload/v1769362878/blank-profile-picture-973460_1920_ylqoxc.jpg");
+}
+
+.photo-placeholder.abogado {
+    background-image: url("https://res.cloudinary.com/degqhlfa0/image/upload/v1769362878/blank-profile-picture-973460_1920_ylqoxc.jpg");
+}
+
+/* TAMAÑO DE FOTO EN QUIENES SOMOS */
+.photo-placeholder img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.cta-button {
+    display: flex;
+    margin: 0;                    /* 🔴 elimina saltos */
+    padding: 0.6rem 2.5rem;
+    border-radius: 6px;
+    border: 2px solid #6C7A89;
+    background: #6C7A89;
+    color: #ffffff;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s, border-color 0.3s;
+    align-items: center;
+    justify-content: center;
+    z-index: 1200;                /* por encima del hero / lottie */
+}
+
+/* CTA FIJO EN INDEX */
+.home .hero .cta-button {
+    position: fixed;
+    bottom: 32vh;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2200;
+    pointer-events: auto;
+}
+
+.cta-button:hover {
+    background: #2F4853;
+    border-color: #2F4853;
+    color: #fff;
+}
+
+
+
+
+
+/* =========================================
+   4. SECCIONES ESPECÍFICAS
+   ========================================= */
+   
+   
+.hero  {
+    flex: 1;
+    min-height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-content {
+     display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between; /* 🔑 */
+    
+}
+
+/* TAMAÑO EN CONTENEDOR DE SERVICIOS */
+.services-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+/* DISEÑO DE BLOQUE SERVICIOS */
+.service-block {
+    display: flex;
+    flex-direction: column;
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(28,46,74,0.1);
+}
+
+/* DISEÑO DE TEXTO EN SERVICIOS (ALTURA FIJA) */
+.service-text {
+    background: #2F4853;
+    color: #fff;
+    padding: 2rem;
+    height: 170px;          /* 🔴 CLAVE: todos iguales */
+    overflow: hidden;       /* corta texto sobrante */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* TITULOS EN SERVICIO */
+.service-text h3 {
+    margin: 0 0 0.8rem 0;
+    font-size: 1.4rem;
+    color: #ffffff;
+}
+
+/* TEXTO EN SERVICIOS */
+.service-text p {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+/* IMAGENES EN SERVICIOS */
+.service-img {
+    width: 100%;
+    height: 180px;          /* 🔴 todas las imágenes iguales */
+    object-fit: cover;
+    display: block;
+}
+
+.service-block:hover {
+    border-color: #6c7a89;
+    transform: translateY(-5px);
+}
+
+/* DISEÑO DE CONTENEDOR EN QUIENES SOMOS */
+.team-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.member-info {
+    border-radius: 6px;
+    padding: 1.5rem;
+    border: 1px solid #ccc;
+    background-color: #2F4853;
+}
+
+/* ESTILO DE TEXTO EN QUIENES SOMOS*/
+
+.member-info h2 {
+  color: #ffffff; /* nombre */
+  font-weight: 900;
+  font-size: 24PX;
+}
+
+.member-info p {
+  color: #ffffff; /* descripción */
+    font-weight: 300;
+    padding-top: 10PX;
+     font-size: 14PX;
+}
+
+.member-info strong {
+  color: #EAE0D5; /* cargo */
+  font-weight: 900;
+  font-size: 15PX;
+  
+}
+
+/* CONTACTO POSICION */
+.contacto-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.contacto-introduccion {
+    display: flex;
+    justify-content: center; /* centra el contenido interno */
+}
+
+.contacto-introduccion p {
+    max-width: 1760px;        /* controla ancho visual */
+    text-align: center;      /* centra el texto */
+    line-height: 1.6;
+}
+
+.contacto-foto {
+      display: block;
+}
+
+
+
+
+
+/* =========================================
+   5. MODAL Y FORMULARIO BASE
+   ========================================= */
+
+
+.modal {
+    position: fixed;
+    inset: 0;
+    z-index: 9000;
+    background-color: #2f48538f;
+    backdrop-filter: blur(3px);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.modal.active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+.modal-content {
+    background-color: #fff;
+    padding: 2.5rem;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 500px;
+    position: relative;   /* Quitar márgenes automáticos, ya que flex se encarga */
+    margin: 0;
+}
+
+/* CERRAR MODAL CON X */
+.close-modal {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 28px;
+    cursor: pointer;
+}
+
+/* FORMULARIO BASE */
+.main-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    font-family: 'Inter', sans-serif;
+}
+
+.main-form input,
+.main-form select,
+.main-form textarea {
+     font-family: 'Inter', sans-serif;
+    width: 100%;
+    padding: 0.9rem;
+    border-radius: 6px;
+    border: 3px solid #6C7A89;
+    font-size: 0.95rem;
+    color: #6C7A89;
+    background-color: #fff;
+}
+
+.main-form input::placeholder,
+.main-form textarea::placeholder {
+    color: #6C7A89;
+    opacity: 1;
+}
+
+.main-form input:focus,
+.main-form select:focus,
+.main-form textarea:focus {
+    outline: none;
+    border-color: #2F4853;
+    color: #2F4853;
+}
+
+/* BOTON DE ENVIO FORMULARIO */
+.submit-btn {
+    padding: 1rem;
+    background: #6C7A89;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-family: 'Cabin', sans-serif;
+    letter-spacing: 0.5px;
+}
+
+.submit-btn:hover {
+    background: #2F4853;
+}
+
+/* SELECT BASE */
+.main-form select {
+    color: #6C7A89;
+}
+
+.main-form option {
+    color: #2F4853;
+    background-color: #ffffff;
+    font-family: 'Inter', sans-serif;
+}
+
+/* DISEÑO DE TITULOS DEL MODAL-FORMULARIO */
+.modal-content h2,
+.modal-content h3 {
+    margin-bottom: 1.5rem;
+    font-family: 'Cabin', sans-serif;
+    color: #2F4853;
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-align: center;
+}
+
+.modal .submit-btn:hover {
+    background-color: #2F4853;
+}
+
+/* FORMULARIO EXCLUSIVO PÁGINA CONTACTO (POR SI SE QUISIERA MODIFICAR INDIVIDUALMENTE) */
+.contacto-formulario .main-form {
+    background: transparent;
+    padding: 1rem;
+    border-radius: 6px;
+    max-height: 420px;
+    margin-top: -15px;
+}
+
+.contacto-formulario .main-form input,
+.contacto-formulario .main-form select,
+.contacto-formulario .main-form textarea {
+    border-color: #6C7A89;
+    color: #6C7A89;
+}
+
+.contacto-formulario .main-form select {
+    color: #2F4853;
+}
+
+.contacto-formulario .main-form option {
+    color: #6C7A89;
+}
+
+.contacto-formulario .submit-btn {
+    background: #6C7A89;
+}
+
+.contacto-formulario .submit-btn:hover {
+    background: #2F4853;
+}
+
+/* EVITA FLASH DEL MODAL AL CARGAR */
+#contactModal {
+    opacity: 0;
+    visibility: hidden;
+}
+
+
+
+
+
+/* =========================================
+   6. FOOTER
+   ========================================= */
+
+
+.footer {
+  padding: 0.2rem 5rem;   /* antes 3rem 2rem */
+  text-align: center;
+ margin-top: auto;
+border: #e4e3e3 solid 1px;
+  background: #f8f8f8;
+  position: relative;
+}
+
+.footer p,
+.footer a {
+  font-size: 0.7rem;
+  line-height: 1.0;
+  margin: 0.3rem 0;
+}
+
+
+
+
+
+/* =========================================
+   7. MEDIA QUERIES (Escritorio > 768px)
+   ========================================= */
+
+
+@media (min-width: 1200px) {
+.menu-toggle {
+        display: none;
+    }
+    
+.header {
+        display: grid;
+        /* Usamos 1fr a los lados para que la columna central sea el centro matemático real */
+        grid-template-columns: 1fr auto 1fr; 
+        align-items: center;
+        padding: 10px 40px;
+        height: 80px; /* Altura fija para evitar saltos de línea */
+    }
+
+.logo-container {
+        grid-column: 1;
+        justify-self: start;
+        display: flex;
+        align-items: center;
+        min-width: 150px; /* Reserva espacio aunque no haya logo */
+    }
+
+
+/* MENU CENTRADO ESTATICO */
+.nav-sidebar {
+        grid-column: 2;
+        justify-self: center;
+        position: static;
+        width: auto;
+        background: none;
+        padding: 0;
+        box-shadow: none;
+    }
+.nav-sidebar ul li {
+        margin: 1.2rem 0;
+}
+
+.nav-sidebar ul li a {
+        font-size:  1.0rem !important; 
+}
+
+.nav-sidebar ul {
+        display: flex;
+        gap: 30px;
+    }
+    .nav-footer {
+        display: none;
+    }
+
+    /* REDES SOCIALES */
+.social-links {
+        grid-column: 3;
+        justify-self: end;
+        display: flex;
+        gap: 10px;
+        min-width: 150px; /* Reserva el mismo espacio que el logo al otro lado */
+    }
+
+.social-links a {
+        text-decoration: none;
+        color: #2F4853;
+        font-size: 1.5rem;
+        margin-left: 5px;
+        transition: color 0.3s;
+    }
+
+.social-links a:hover {
+        color: #6c7a89;
+    }
+
+    /* LOGICA DE LA PAGINA DE INICIO*/
+.home .logo-container,
+.home .social-links {
+        visibility: hidden; /* Oculta pero mantiene el espacio ocupado */
+        pointer-events: none;
+    }
+
+    /* GRID SERVICIOS */
+.services-list {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2rem;
+    }
+
+    /* GRID EQUIPO */
+.team-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 60px;
+        padding-top: 50px;
+    }
+
+.team-member {
+        display: grid;
+        grid-template-columns: auto 1fr; 
+        gap: 20px;
+    }
+
+.member-photo .photo-placeholder {
+        aspect-ratio: 2 / 3;
+        height: 380px;
+        width: 280px;
+        margin-bottom: 0;
+    }
+
+.team-member:nth-child(1) { align-items: start; }
+
+.team-member:nth-child(2) {
+        grid-template-columns: 1fr auto; 
+        align-items: end;
+    }
+    
+.team-member:nth-child(2) .member-photo { order: 2; }
+.team-member:nth-child(2) .member-info { 
+        order: 1; 
+        text-align: right; 
+    }
+
+    /* CONTACTO LAYOUT */
+.contacto-layout {
+        flex-direction: row;
+        align-items: flex-start;
+    }
+
+.contacto-formulario {
+        flex: 1;
+        max-width: 500px;
+    }
+
+.contacto-foto {
+        display: block;
+        flex: 1;
+    }
+    
+.contacto-foto .photo-placeholder {
+        aspect-ratio: 16 / 9;
+        margin-bottom: 0;
+    }
+
+.map-container {
+        margin-top: 0 !important;
+         border: 1px solid #f8f8f8 !important;
+    }
+
+.nav-cta {
+        display: none;
+    }
+
+.nav-sidebar ul li a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 0;
+  height: 2px;
+  background: #6C7A89;
+  transition: width 0.3s ease;
+}
+
+.nav-sidebar ul li a:hover::after {
+  width: 100%;
+}
+   
+
+}
+
+
+
+
+
+
+/* =========================================
+   8. CSS ADICIONAL PARA FUNCIONALIDADES ESPECÍFICAS
+   ========================================= */
+
+
+/* VIDEO DE FONDO HERO (NO AFECTA NADA  MÁS) */
+.hero video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* MANTIENE EL CONTENIDO POR ENCIMA DEL VIDEO */
+.hero > * {
+    position: relative;
+    z-index: 1;
+}
+
+/* MAPA */
+.map-container {
+    width: 100%;
+    min-height: 100px; 
+    aspect-ratio: 14 / 9;
+    border: 14px solid #f8f8f8;;
+    overflow: hidden;
+       margin-top: -20px; 
+    border-radius: 6px;
+}
+
+.map-container iframe {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+/* REDES Y POLITICAS DE PRIVACIDAD EN EL MENU LATERAL */
+.nav-sidebar {
+    display: flex;
+    flex-direction: column;
+}
+
+.nav-footer {
+    margin-top: auto; /* 🔑 lo manda al fondo */
+    text-align: center;
+    padding-top: 2rem;
+    border-top: 1px solid #ddd;
+}
+
+.nav-socials {
+    display: flex;
+    justify-content: center;
+    gap: 26px;
+    margin-bottom: 1rem;
+}
+
+.nav-socials a {
+    font-size: 1.8rem;
+    color: #2F4853;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.nav-socials a:hover {
+    color: #6C7A89;
+}
+.nav-privacy {
+    display: block;
+    font-size: 0.75rem;
+    color: #6C7A89;
+    text-decoration: none;
+}
+
+.nav-privacy:hover {
+    text-decoration: underline;
+    
+}
+/* CTA BOTON DE CONTACTO EN EL MENU LATERAL */
+.nav-cta {
+    width: 100%;
+    margin: 2rem 0 1.5rem;
+    padding: 0.9rem;
+    font-size: 0.95rem;
+    text-align: center;
+}
+
+/* CLICK AZUL CAMBIADO POR COLOR DE EMPRESA EN MOVIL */
+a, button {
+        -webkit-tap-highlight-color: #6c7a8975; /* rojo semitransparente */
+    }
+
+/* DISEÑO DE MENSAJE AL ENVIAR FORMULARIO */
+#formSuccess {
+    display: none;
+    text-align: center;
+    padding: 2rem 1.5rem;
+}
+
+#formSuccess h3 {
+    font-family: 'Cabin', sans-serif;
+    font-size: 1.4rem;
+    margin-bottom: 0.8rem;
+    color: #111;
+}
+
+#formSuccess p {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: #555;
+}
+
+/* ICONO */
+#formSuccess::before {
+    content: "✓";
+    display: block;
+    font-size: 2.2rem;
+    color: #6C7A89; /* color palomita */
+    margin-bottom: 0.8rem;
+}
+
+/* DISEÑO DE MENSAJE AL ENVIAR FORMULARIO EN PAGINA CONTACTO */
+#contactPageSuccess {
+    display: none;
+    text-align: center;   /* centra el texto */
+    padding: 2rem 1.5rem;
+}
+
+/* TITULO */
+#contactPageSuccess h3 {
+    font-family: 'Cabin', sans-serif;
+    font-size: 1.4rem;
+    margin-bottom: 0.8rem;
+    color: #111;
+}
+
+/* PARRAFO */
+#contactPageSuccess p {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: #555;
+}
+
+/* INTRO LOGO */
+#intro {
+    position: fixed;
+    inset: 0;
+    background: transparent;
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+     padding-bottom: 8vh;
+}
+
+/* CONTENEDOR DE LA ANIMACION INTRO */
+#lottieIntro {
+      width: clamp(460px, 60vw, 650px);
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: translateX(-2%);
+}
+
+
+
+
+
+/* ================================
+   ANIMACIONES DE ENTRADA
+   ================================ */
+   
+
+/* ANIMACION PARA LA PAGINA INDEX */
+.animate {
+    opacity: 0;
+    transition: opacity 0.9s ease;
+}
+
+/* Animación sin afectar la posición ni el display */
+.animate.from-bottom {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.9s ease, transform 0.9s ease;
+}
+
+.animate.is-visible {
+    opacity: 1;
+}
+
+/* ANIMACION EN LAS OTRAS PAGINAS */
+.animate-body {
+    opacity: 0;          /* empieza invisible */
+    transform: none;     /* no mueve el layout, solo opacidad */
+    transition: opacity 0.9s ease;
+    will-change: opacity;
+}
+
+/* Cuando se hace visible */
+.animate-body.is-visible {
+    opacity: 1;
+    transform: none; /* permanece en su posición real */
+}
+
+/* FORZAR VISIBILIDAD CRÍTICA, HACE QUE EL MODAL SEA VISIBLE Y FUNCIONAL */
+#contactModal.active {
+    display: flex !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important; /* Permite que se pueda interactuar */
+    z-index: 99999 !important;      /* Por encima de cualquier video o intro */
+}
+
+.modal-content {
+    z-index: 100000 !important;    /* Asegura que el formulario esté arriba */
+}

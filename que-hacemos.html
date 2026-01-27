@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Qué Hacemos | Izate</title>
+    <link rel="icon" href="https://res.cloudinary.com/degqhlfa0/image/upload/v1769365258/izatewebicono-01_zghdfw.png">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cabin:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+
+<header class="header animate animate-header">
+    <div class="logo-container">
+        <a href="index.html">
+            <img src="https://res.cloudinary.com/degqhlfa0/image/upload/v1769522344/izate_osasli.png" alt="Izate" class="logo">
+        </a>
+    </div>
+
+    <nav class="nav-sidebar" id="navSidebar">
+        <button class="close-btn" id="menuClose">&times;</button>
+        <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="quienes-somos.html">Quiénes Somos</a></li>
+            <li><a href="que-hacemos.html">Qué Hacemos</a></li>
+            <li><a href="contacto.html">Contacto</a></li>
+        </ul>
+
+        <!-- CTA SOLO MENÚ MÓVIL -->
+        <button id="openModalMobile" class="cta-button nav-cta">
+            Cuéntanos tu caso
+        </button>
+
+        <div class="nav-footer">
+            <div class="nav-socials">
+                <a href="https://www.instagram.com/izate360/" target="_blank" aria-label="Instagram">
+                    <i class="fa-brands fa-instagram"></i>
+                </a>
+                <a href="https://linkedin.com/in/tuperfil" target="_blank" aria-label="LinkedIn">
+                    <i class="fa-brands fa-linkedin"></i>
+                </a>
+                <a href="https://facebook.com/tuperfil" target="_blank" aria-label="Facebook">
+                    <i class="fa-brands fa-facebook"></i>
+                </a>
+            </div>
+            <a href="politicas-de-privacidad.html" class="nav-privacy">Políticas de privacidad</a>
+        </div>
+    </nav>
+
+    <div class="social-links">
+        <a href="https://instagram.com/tuperfil" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+        <a href="https://linkedin.com/in/tuperfil" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
+        <a href="https://facebook.com/tuperfil" target="_blank"><i class="fa-brands fa-facebook"></i></a>
+
+        <button id="openModal" class="cta-button header-cta animate animate-cta">
+            Cuéntanos tu caso
+        </button>
+    </div>
+
+    <button class="menu-toggle" id="menuOpen"><span></span><span></span><span></span></button>
+</header>
+
+<main class="container animate animate-body">
+    <h1 class="animate animate-body">Nuestros Servicios</h1>
+
+    <section class="services-list">
+        <div class="service-block animate animate-body">
+            <div class="service-inner">
+                <div class="service-text">
+                    <h3>Jurídico-Pericial</h3>
+                    <p>Mezclamos el enfoque técnico y legal para resolver problemas en obras y reformas de forma integral.</p>
+                </div>
+                <img class="service-img" src="https://res.cloudinary.com/degqhlfa0/image/upload/v1769362878/Gemini_Generated_Image_jddurjddurjddurj_b7bgmb.png" alt="Jurídico-Pericial">
+            </div>
+        </div>
+
+        <div class="service-block animate animate-body">
+            <div class="service-inner">
+                <div class="service-text">
+                    <h3>Herencias y Patrimonio</h3>
+                    <p>Gestionamos asuntos legales y patrimoniales relacionados con inmuebles para proteger tu seguridad.</p>
+                </div>
+                <img class="service-img" src="https://res.cloudinary.com/degqhlfa0/image/upload/v1769362879/Gemini_Generated_Image_ansndfansndfansn_oqansn.png" alt="Herencias y Patrimonio">
+            </div>
+        </div>
+
+        <div class="service-block animate animate-body">
+            <div class="service-inner">
+                <div class="service-text">
+                    <h3>Tasaciones</h3>
+                    <p>Oficiales para empresas y extraoficiales para particulares o juzgados.</p>
+                </div>
+                <img class="service-img" src="https://res.cloudinary.com/degqhlfa0/image/upload/v1769362879/Gemini_Generated_Image_hsacadhsacadhsac_yojcnm.png" alt="Tasaciones">
+            </div>
+        </div>
+    </section>
+
+    <!-- NUEVO MODAL PARA QUIENES SOMOS -->
+    <div id="contactModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" id="closeModal">&times;</span>
+            <h2>Contacto</h2>
+            <!-- FORMULARIO -->
+            <form id="contactForm" class="main-form">
+                <input type="text" name="nombre" placeholder="Nombre completo" required>
+                <input type="email" name="email" placeholder="Correo electrónico" required>
+                <select name="tipo_consulta" required>
+                    <option value="" disabled selected>Tipo de consulta</option>
+                    <option value="juridica">Duda Jurídica</option>
+                    <option value="tecnica">Duda Técnica</option>
+                    <option value="360">Consultoría 360 (Ambas)</option>
+                </select>
+                <textarea name="mensaje" placeholder="Describe tu caso o consulta" rows="5" required></textarea>
+                <button type="submit" class="submit-btn">ENVIAR</button>
+            </form>
+
+            <!-- MENSAJE DE ÉXITO -->
+            <div id="formSuccess" class="form-success">
+                <h3>¡Consulta enviada!</h3>
+                <p>Gracias por contactarnos. Te responderemos lo antes posible.</p>
+            </div>
+        </div>
+    </div>
+</main>
+
+<footer class="footer animate animate-footer">
+    <p>Cantabria | info@izate.es</p>
+    <p>&copy; 2024 Izate Consulting 360</p>
+</footer>
+
+<script src="main.js"></script>
+</body>
+</html>

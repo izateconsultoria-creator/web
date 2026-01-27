@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacto | Izate</title>
+    <link rel="icon" href="https://res.cloudinary.com/degqhlfa0/image/upload/v1769365258/izatewebicono-01_zghdfw.png">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cabin:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+<header class="header">
+    <div class="logo-container">
+        <a href="index.html">
+            <img src="https://res.cloudinary.com/degqhlfa0/image/upload/v1769522344/izate_osasli.png" alt="Izate" class="logo">
+        </a>
+    </div>
+
+    <nav class="nav-sidebar" id="navSidebar">
+        <button class="close-btn" id="menuClose">&times;</button>
+        <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="quienes-somos.html">Quiénes Somos</a></li>
+            <li><a href="que-hacemos.html">Qué Hacemos</a></li>
+            <li><a href="contacto.html">Contacto</a></li>
+        </ul>
+        <!-- CTA SOLO MENÚ MÓVIL -->
+        <button id="openModalMobile" class="cta-button nav-cta">
+            Cuéntanos tu caso
+        </button>
+        <!-- BLOQUE INFERIOR SOLO MENÚ MÓVIL -->
+        <div class="nav-footer">
+            <div class="nav-socials">
+                <a href="https://instagram.com/tuperfil" target="_blank" aria-label="Instagram">
+                    <i class="fa-brands fa-instagram"></i>
+                </a>
+                <a href="https://linkedin.com/in/tuperfil" target="_blank" aria-label="LinkedIn">
+                    <i class="fa-brands fa-linkedin"></i>
+                </a>
+                <a href="https://facebook.com/tuperfil" target="_blank" aria-label="Facebook">
+                    <i class="fa-brands fa-facebook"></i>
+                </a>
+            </div>
+            <a href="politicas-de-privacidad.html" class="nav-privacy">
+                Políticas de privacidad
+            </a>
+        </div>
+    </nav>
+
+    <div class="social-links">
+        <a href="https://instagram.com/tuperfil" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+        <a href="https://linkedin.com/in/tuperfil" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
+        <a href="https://facebook.com/tuperfil" target="_blank"><i class="fa-brands fa-facebook"></i></a>
+
+        <button id="openModal" class="cta-button header-cta">
+            Cuéntanos tu caso
+        </button>
+    </div>
+
+    <button class="menu-toggle" id="menuOpen"><span></span><span></span><span></span></button>
+</header>
+
+<main class="container">
+    <h1>Contacto</h1>
+    <div class="contacto-introduccion">
+        <p>Si necesitas asesoramiento técnico o jurídico, o tienes una duda sobre tu patrimonio, estamos aquí para ayudarte. Cuéntanos tu caso y nos pondremos en contacto contigo a la mayor brevedad.</p>
+    </div>
+    
+    <section class="contacto-layout">
+      <div class="contacto-formulario">
+    <form id="contactPageForm" class="main-form">
+        <input type="text" name="name" placeholder="Nombre completo" required>
+        <input type="email" name="email" placeholder="Email" required>
+        <select name="type" required>
+            <option value="" disabled selected>Tipo de duda</option>
+            <option value="juridica">Duda Jurídica</option>
+            <option value="tecnica">Duda Técnica</option>
+            <option value="360">Consultoría 360</option>
+        </select>
+        <textarea name="message" placeholder="¿En qué podemos ayudarte?" rows="6" required></textarea>
+        <button type="submit" class="submit-btn">ENVIAR CONSULTA</button>
+    </form>
+
+    <div id="contactPageSuccess" class="form-success" style="display:none;">
+        <h3>¡Consulta enviada!</h3>
+        <p>Gracias por contactarnos. Te responderemos lo antes posible.</p>
+    </div>
+</div>
+
+
+        <div class="contacto-foto">
+            <div class="map-container">
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d372675.84203500405!2d-4.330338654569419!3d43.135398343851!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd4920db090ebfcb%3A0x104f58273c9c8d0!2sCantabria!5e0!3m2!1ses!2ses!4v1768815251213!5m2!1ses!2ses"
+                    width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- NUEVO MODAL PARA CONTACTO -->
+    <div id="contactModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" id="closeModal">&times;</span>
+            <h3>Contacto</h3>
+            <form id="contactForm" class="main-form">
+                <input type="text" name="nombre" placeholder="Nombre completo" required>
+                <input type="email" name="email" placeholder="Correo electrónico" required>
+                <select name="tipo_consulta" required>
+                    <option value="" disabled selected>Tipo de consulta</option>
+                    <option value="juridica">Duda Jurídica</option>
+                    <option value="tecnica">Duda Técnica</option>
+                    <option value="360">Consultoría 360 (Ambas)</option>
+                </select>
+                <textarea name="mensaje" placeholder="Describe tu caso o consulta" rows="5" required></textarea>
+                <button type="submit" class="submit-btn">ENVIAR</button>
+            </form>
+
+            <!-- MENSAJE DE ÉXITO MODAL -->
+            <div id="formSuccess" class="form-success" style="display:none;">
+                <h3>¡Consulta enviada!</h3>
+                <p>Gracias por contactarnos. Te responderemos lo antes posible.</p>
+            </div>
+        </div>
+    </div>
+</main>
+
+<footer class="footer">
+    <p>Cantabria | info@izate.es</p>
+    <p>&copy; 2024 Izate Consulting 360</p>
+</footer>
+
+<script src="main.js"></script>
+</body>
+</html>

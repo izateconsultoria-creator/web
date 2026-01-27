@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Izate Consulting 360 | Inicio</title>
+    <link rel="icon" href="https://res.cloudinary.com/degqhlfa0/image/upload/v1769365258/izatewebicono-01_zghdfw.png">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cabin:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+
+<!-- PARA FIJAR ANIMACION Y BOTON -->
+<body class="home">
+
+<!-- INTRO LOGO LOTTIE -->
+<div id="intro">
+    <div id="lottieIntro"></div>
+</div>
+
+<header class="header animate from-top">
+    <div class="logo-container"></div>
+
+    <button class="menu-toggle" id="menuOpen">
+        <span></span><span></span><span></span>
+    </button>
+
+    <nav class="nav-sidebar" id="navSidebar">
+        <button class="close-btn" id="menuClose">&times;</button>
+
+        <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="quienes-somos.html">Quiénes Somos</a></li>
+            <li><a href="que-hacemos.html">Qué Hacemos</a></li>
+            <li><a href="contacto.html">Contacto</a></li>
+        </ul>
+
+        <div class="nav-footer">
+            <div class="nav-socials">
+                <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+                <a href="#"><i class="fa-brands fa-facebook"></i></a>
+            </div>
+
+            <a href="politicas-de-privacidad.html" class="nav-privacy">
+                Políticas de privacidad
+            </a>
+        </div>
+    </nav>
+</header>
+
+<main>
+<section class="hero animate fade-up">
+    <video autoplay muted loop playsinline>
+        <source src="https://res.cloudinary.com/dxsip0hvb/video/upload/v1768601887/3188-166339073_uu60qf.mp4" type="video/mp4">
+    </video>
+
+    <div class="hero-content">
+        <button id="openModal" class="cta-button animate from-bottom">
+            Cuéntanos tu caso
+        </button>
+    </div>
+</section>
+
+<div id="contactModal" class="modal">
+    <div class="modal-content">
+        <span class="close-modal" id="closeModal">&times;</span>
+        <h2>Contacto</h2>
+
+        <form id="contactForm" class="main-form">
+            <input type="text" name="nombre" placeholder="Nombre completo" required>
+            <input type="email" name="email" placeholder="Correo electrónico" required>
+
+            <select name="tipo_consulta" required>
+                <option value="" disabled selected>Tipo de consulta</option>
+                <option value="juridica">Duda Jurídica</option>
+                <option value="tecnica">Duda Técnica</option>
+                <option value="360">Consultoría 360 (Ambas)</option>
+            </select>
+
+            <textarea name="mensaje" placeholder="Describe tu caso o consulta" rows="5" required></textarea>
+            <button type="submit" class="submit-btn">ENVIAR</button>
+        </form>
+
+        <div id="formSuccess" class="form-success">
+            <h3>¡Consulta enviada!</h3>
+            <p>Gracias por contactarnos. Te responderemos lo antes posible.</p>
+        </div>
+    </div>
+</div>
+</main>
+
+<footer class="footer animate fade-up">
+    <p>Cantabria | info@izate.es</p>
+    <p>&copy; 2024 Izate Consulting 360</p>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
+<script src="main.js"></script>
+
+</body>
+</html>

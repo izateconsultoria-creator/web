@@ -109,50 +109,114 @@
             opacity: 0; height: 0; padding-top: 0; padding-bottom: 0; overflow: hidden;
         }
 
-        /* ── MÓVIL: panel de agentes en tira horizontal ── */
+        /* ── MÓVIL: selector de agente compacto ── */
         @media (max-width: 1023px) {
+            /* Ocultar panel lateral en móvil */
+            #agent-panel { display: none !important; }
+
             #chat-interface-wrapper.expanded #expanded-view {
-                height: 480px;
-                max-height: 480px;
+                height: 460px;
+                max-height: 460px;
+                flex-direction: column !important;
             }
-            #agent-panel {
-                flex-direction: row !important;
-                align-items: center;
-                padding: 8px 12px !important;
-                gap: 8px !important;
-                min-height: auto !important;
-                overflow-x: auto;
-                border-bottom: 1px solid rgba(255,255,255,0.1) !important;
-                border-right: none !important;
-                width: 100% !important;
-            }
-            #agent-panel .space-y-2 { display: none; }
-            #agent-panel > div:last-child {
-                display: flex !important;
-                flex-direction: row !important;
-                max-height: none !important;
-                overflow-x: auto;
-                overflow-y: visible;
-                gap: 8px;
-                width: 100%;
-            }
-            .agent-card {
-                min-width: 110px;
-                flex-shrink: 0;
-                padding: 8px !important;
-            }
-            #chat-messages-area {
-                height: 320px;
-            }
+            #chat-messages-area { height: 380px; }
+
+            /* Selector compacto visible solo en móvil */
+            #mobile-agent-selector { display: flex; }
         }
         @media (max-width: 480px) {
             #chat-interface-wrapper.expanded #expanded-view {
                 height: 420px;
                 max-height: 420px;
             }
-            #chat-messages-area {
-                height: 280px;
-            }
+            #chat-messages-area { height: 340px; }
+        }
+        @media (min-width: 1024px) {
+            #mobile-agent-selector { display: none !important; }
+        }
+
+        /* Selector de agente móvil */
+        #mobile-agent-selector {
+            display: none;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 16px;
+            background: rgba(255,255,255,0.08);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            cursor: pointer;
+            user-select: none;
+            position: relative;
+        }
+        #mobile-agent-selector .agent-current {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        #mobile-agent-selector .agent-current-icon {
+            width: 32px; height: 32px;
+            border-radius: 50%;
+            background: rgba(234,224,213,0.3);
+            display: flex; align-items: center; justify-content: center;
+        }
+        #mobile-agent-selector .agent-current-name {
+            color: #fff;
+            font-size: 13px;
+            font-weight: 600;
+            font-family: 'Cabin', sans-serif;
+        }
+        #mobile-agent-selector .agent-current-sub {
+            color: rgba(255,255,255,0.45);
+            font-size: 10px;
+        }
+        #mobile-agent-selector .chevron {
+            color: rgba(255,255,255,0.5);
+            font-size: 18px;
+            transition: transform 0.3s;
+        }
+        #mobile-agent-selector.open .chevron { transform: rotate(180deg); }
+
+        /* Dropdown de agentes — fixed para evitar clip del overflow:hidden padre */
+        #mobile-agent-dropdown {
+            display: none;
+            flex-direction: column;
+            position: fixed;
+            left: 0; right: 0;
+            background: rgba(30,46,53,0.97);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-top: 1px solid rgba(255,255,255,0.1);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            z-index: 99998;
+            padding: 8px;
+            gap: 4px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+        }
+        #mobile-agent-selector.open #mobile-agent-dropdown { display: flex; }
+        .mobile-agent-option {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 12px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: background 0.2s;
+            border: 1px solid transparent;
+        }
+        .mobile-agent-option:hover { background: rgba(255,255,255,0.08); }
+        .mobile-agent-option.active {
+            background: rgba(255,255,255,0.14);
+            border-color: rgba(255,255,255,0.25);
+        }
+        .mobile-agent-option .opt-icon {
+            width: 36px; height: 36px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0;
+        }
+        .mobile-agent-option .opt-name {
+            color: #fff; font-size: 13px; font-weight: 600;
+        }
+        .mobile-agent-option .opt-sub {
+            color: rgba(255,255,255,0.4); font-size: 10px;
         }
 
         /* ── MODAL CONTACTO ── */
@@ -312,6 +376,44 @@
 
 <!-- EXPANDED -->
 <div class="flex flex-col lg:flex-row h-full overflow-hidden" id="expanded-view">
+
+
+<!-- SELECTOR MÓVIL DE AGENTE -->
+<div id="mobile-agent-selector" style="position:relative;">
+    <div class="agent-current">
+        <div class="agent-current-icon">
+            <span class="material-symbols-outlined" style="color:#EAE0D5;font-size:18px;" id="mobile-current-icon">smart_toy</span>
+        </div>
+        <div>
+            <div class="agent-current-name" id="mobile-current-name">Asistente General</div>
+            <div class="agent-current-sub" id="mobile-current-sub">Consultas estratégicas</div>
+        </div>
+    </div>
+    <span class="material-symbols-outlined chevron">expand_more</span>
+
+    <div id="mobile-agent-dropdown">
+        <div class="mobile-agent-option active" data-name="Asistente General" data-sub="Consultas estratégicas" data-icon="smart_toy" data-bg="rgba(234,224,213,0.3)" data-color="#EAE0D5">
+            <div class="opt-icon" style="background:rgba(234,224,213,0.3);"><span class="material-symbols-outlined" style="color:#EAE0D5;font-size:18px;">smart_toy</span></div>
+            <div><div class="opt-name">Asistente General</div><div class="opt-sub">Consultas estratégicas</div></div>
+        </div>
+        <div class="mobile-agent-option" data-name="Axel" data-sub="Derecho Civil" data-icon="real_estate_agent" data-bg="rgba(234,224,213,0.2)" data-color="#EAE0D5">
+            <div class="opt-icon" style="background:rgba(234,224,213,0.2);"><span class="material-symbols-outlined" style="color:#EAE0D5;font-size:18px;">real_estate_agent</span></div>
+            <div><div class="opt-name">Axel</div><div class="opt-sub">Derecho Civil</div></div>
+        </div>
+        <div class="mobile-agent-option" data-name="Mili" data-sub="Financiación" data-icon="request_quote" data-bg="rgba(234,224,213,0.2)" data-color="#EAE0D5">
+            <div class="opt-icon" style="background:rgba(234,224,213,0.2);"><span class="material-symbols-outlined" style="color:#EAE0D5;font-size:18px;">request_quote</span></div>
+            <div><div class="opt-name">Mili</div><div class="opt-sub">Financiación</div></div>
+        </div>
+        <div class="mobile-agent-option" data-name="Denis" data-sub="Asesoría Laboral" data-icon="badge" data-bg="rgba(255,255,255,0.1)" data-color="rgba(255,255,255,0.8)">
+            <div class="opt-icon" style="background:rgba(255,255,255,0.1);"><span class="material-symbols-outlined" style="color:rgba(255,255,255,0.8);font-size:18px;">badge</span></div>
+            <div><div class="opt-name">Denis</div><div class="opt-sub">Asesoría Laboral</div></div>
+        </div>
+        <div class="mobile-agent-option" data-name="César" data-sub="Construcción" data-icon="construction" data-bg="rgba(255,255,255,0.1)" data-color="rgba(255,255,255,0.8)">
+            <div class="opt-icon" style="background:rgba(255,255,255,0.1);"><span class="material-symbols-outlined" style="color:rgba(255,255,255,0.8);font-size:18px;">construction</span></div>
+            <div><div class="opt-name">César</div><div class="opt-sub">Construcción</div></div>
+        </div>
+    </div>
+</div>
 
 <!-- Agentes -->
 <div class="w-full border-b lg:border-b-0 lg:border-r border-white/10 bg-white/5 flex flex-col gap-6 lg:w-1/4 p-5" id="agent-panel">
@@ -597,6 +699,74 @@
             modal.classList.remove('active');
         }, 3000);
     });
+</script>
+
+
+<script>
+    // Mobile agent selector
+    const mobileSelector = document.getElementById('mobile-agent-selector');
+    const mobileOptions  = document.querySelectorAll('.mobile-agent-option');
+
+    if (mobileSelector) {
+        const dropdown = document.getElementById('mobile-agent-dropdown');
+
+        function positionDropdown() {
+            const rect = mobileSelector.getBoundingClientRect();
+            dropdown.style.top = (rect.bottom) + 'px';
+        }
+
+        mobileSelector.addEventListener('click', function(e) {
+            if (!e.target.closest('.mobile-agent-option')) {
+                const isOpen = this.classList.contains('open');
+                if (!isOpen) {
+                    positionDropdown();
+                    this.classList.add('open');
+                } else {
+                    this.classList.remove('open');
+                }
+            }
+        });
+
+        mobileOptions.forEach(opt => {
+            opt.addEventListener('click', function() {
+                const name = this.dataset.name;
+                const sub  = this.dataset.sub;
+                const icon = this.dataset.icon;
+                const color = this.dataset.color;
+                const bg   = this.dataset.bg;
+
+                document.getElementById('mobile-current-name').textContent = name;
+                document.getElementById('mobile-current-sub').textContent  = sub;
+                const iconEl = document.getElementById('mobile-current-icon');
+                iconEl.textContent  = icon;
+                iconEl.style.color  = color;
+                iconEl.parentElement.style.background = bg;
+
+                mobileOptions.forEach(o => o.classList.remove('active'));
+                this.classList.add('active');
+
+                // sync with desktop agent cards
+                document.querySelectorAll('.agent-card').forEach(card => {
+                    const cardName = card.querySelector('span.font-semibold')?.textContent;
+                    card.classList.toggle('active', cardName === name);
+                });
+
+                // system message
+                const sysMsg = document.createElement('div');
+                sysMsg.className = 'flex justify-center w-full my-2 animate-fade-in';
+                sysMsg.innerHTML = `<span class="bg-white/5 border border-white/10 text-[10px] uppercase tracking-widest text-white/40 px-3 py-1 rounded-full">Conversando con ${name}</span>`;
+                chatMessagesArea.appendChild(sysMsg);
+                chatMessagesArea.scrollTo({ top: chatMessagesArea.scrollHeight, behavior: 'smooth' });
+
+                mobileSelector.classList.remove('open');
+            });
+        });
+
+        // close dropdown clicking outside
+        document.addEventListener('click', function(e) {
+            if (!mobileSelector.contains(e.target)) mobileSelector.classList.remove('open');
+        });
+    }
 </script>
 
 </body></html>

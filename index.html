@@ -109,6 +109,52 @@
             opacity: 0; height: 0; padding-top: 0; padding-bottom: 0; overflow: hidden;
         }
 
+        /* ── MÓVIL: panel de agentes en tira horizontal ── */
+        @media (max-width: 1023px) {
+            #chat-interface-wrapper.expanded #expanded-view {
+                height: 480px;
+                max-height: 480px;
+            }
+            #agent-panel {
+                flex-direction: row !important;
+                align-items: center;
+                padding: 8px 12px !important;
+                gap: 8px !important;
+                min-height: auto !important;
+                overflow-x: auto;
+                border-bottom: 1px solid rgba(255,255,255,0.1) !important;
+                border-right: none !important;
+                width: 100% !important;
+            }
+            #agent-panel .space-y-2 { display: none; }
+            #agent-panel > div:last-child {
+                display: flex !important;
+                flex-direction: row !important;
+                max-height: none !important;
+                overflow-x: auto;
+                overflow-y: visible;
+                gap: 8px;
+                width: 100%;
+            }
+            .agent-card {
+                min-width: 110px;
+                flex-shrink: 0;
+                padding: 8px !important;
+            }
+            #chat-messages-area {
+                height: 320px;
+            }
+        }
+        @media (max-width: 480px) {
+            #chat-interface-wrapper.expanded #expanded-view {
+                height: 420px;
+                max-height: 420px;
+            }
+            #chat-messages-area {
+                height: 280px;
+            }
+        }
+
         /* ── MODAL CONTACTO ── */
         #contactModal {
             display: none;
@@ -403,7 +449,7 @@
 <img alt="Oficina Moderna" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCbyzF225sQ5QVF9A8JJDc9SCMgn5oB_ztuLGoAhsuGJ_HwC_STjmbncxfrzxyoaggr7JirUu7TuoH9Pi0tNB620EcDjzRp8dY26vxCBH1yGtIJJpnd0AHQFsoEMsH20BpHWubXbQhpJa2fgD0AjD6xwXZeZJ9dNexIM4wk-Wv6xumai3eywtZ8jtprXMsZ7_0MG6qkaZAsJd1DJOUbiPsxR5e6WVFcY1khNCvNjQEbrixCbToiwXiyE6zSgkAFHKULjOLU2JMK8RE"/>
 </div>
 <div class="absolute -top-6 -right-6 bg-white p-6 rounded-xl shadow-lg border border-border-subtle hidden md:block">
-<p class="text-display-lg-mobile font-bold text-primary">30+</p>
+<p class="text-display-lg-mobile font-bold text-primary">15+</p>
 <p class="text-caption font-label-sm text-secondary uppercase">Años de experiencia</p>
 </div>
 </div>

@@ -108,6 +108,85 @@
         #chat-interface-wrapper:not(.expanded) #chat-top-context {
             opacity: 0; height: 0; padding-top: 0; padding-bottom: 0; overflow: hidden;
         }
+
+        /* ── MODAL CONTACTO ── */
+        #contactModal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.55);
+            z-index: 99999;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(4px);
+        }
+        #contactModal.active { display: flex; }
+        .modal-content {
+            background: #F8F8F8;
+            border-radius: 1.25rem;
+            padding: 2.5rem 2rem;
+            width: 100%;
+            max-width: 480px;
+            position: relative;
+            box-shadow: 0 24px 60px rgba(0,0,0,0.18);
+            animation: fadeIn 0.3s ease;
+        }
+        .modal-content h2 {
+            font-family: 'Cabin', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #2F4853;
+            margin-bottom: 1.5rem;
+        }
+        .close-modal {
+            position: absolute;
+            top: 1rem; right: 1.2rem;
+            font-size: 1.6rem;
+            cursor: pointer;
+            color: #7A8F99;
+            background: none;
+            border: none;
+            line-height: 1;
+            transition: color 0.2s;
+        }
+        .close-modal:hover { color: #2F4853; }
+        .main-form { display: flex; flex-direction: column; gap: 0.9rem; }
+        .main-form input,
+        .main-form select,
+        .main-form textarea {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid #E2E8F0;
+            border-radius: 0.5rem;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            color: #1C1C1C;
+            background: #fff;
+            outline: none;
+            transition: border-color 0.2s;
+            box-sizing: border-box;
+        }
+        .main-form input:focus,
+        .main-form select:focus,
+        .main-form textarea:focus { border-color: #2F4853; }
+        .main-form textarea { resize: vertical; }
+        .submit-btn {
+            background: #2F4853;
+            color: #F8F8F8;
+            border: none;
+            border-radius: 0.5rem;
+            padding: 0.85rem;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+        .submit-btn:hover { opacity: 0.85; }
+        .form-success { display: none; text-align: center; padding: 1rem 0; }
+        .form-success h3 { color: #2F4853; font-family: 'Cabin', sans-serif; font-size: 1.2rem; margin-bottom: 0.5rem; }
+        .form-success p { color: #7A8F99; font-size: 0.9rem; }
     </style>
 </head>
 <body class="bg-background text-on-surface font-body-md overflow-x-hidden">
@@ -118,9 +197,9 @@
 </div>
 <div class="hidden md:flex items-center gap-gutter">
 <a class="text-primary dark:text-primary-fixed-dim font-bold border-b-2 border-primary dark:border-primary-fixed-dim pb-1" href="#">Inicio</a>
-<a class="text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-colors" href="#">Qué Hacemos</a>
+<a class="text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-colors" href="que-hacemos.html">Qué Hacemos</a>
 </div>
-<button class="bg-primary-container text-on-primary px-6 py-2.5 rounded-lg font-label-sm hover:opacity-90 active:scale-95 transition-all shadow-md">Consultar Ahora</button>
+<button id="openModal" class="bg-primary-container text-on-primary px-6 py-2.5 rounded-lg font-label-sm hover:opacity-90 active:scale-95 transition-all shadow-md">Consultar Ahora</button>
 </div>
 </nav>
 
@@ -324,7 +403,7 @@
 <img alt="Oficina Moderna" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCbyzF225sQ5QVF9A8JJDc9SCMgn5oB_ztuLGoAhsuGJ_HwC_STjmbncxfrzxyoaggr7JirUu7TuoH9Pi0tNB620EcDjzRp8dY26vxCBH1yGtIJJpnd0AHQFsoEMsH20BpHWubXbQhpJa2fgD0AjD6xwXZeZJ9dNexIM4wk-Wv6xumai3eywtZ8jtprXMsZ7_0MG6qkaZAsJd1DJOUbiPsxR5e6WVFcY1khNCvNjQEbrixCbToiwXiyE6zSgkAFHKULjOLU2JMK8RE"/>
 </div>
 <div class="absolute -top-6 -right-6 bg-white p-6 rounded-xl shadow-lg border border-border-subtle hidden md:block">
-<p class="text-display-lg-mobile font-bold text-primary">15+</p>
+<p class="text-display-lg-mobile font-bold text-primary">30+</p>
 <p class="text-caption font-label-sm text-secondary uppercase">Años de experiencia</p>
 </div>
 </div>
@@ -346,7 +425,7 @@
 <div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop grid grid-cols-1 md:grid-cols-2 gap-gutter items-center">
 <div class="flex flex-col gap-4">
 <div class="flex items-center gap-3">
-<img alt="Izate Logo Inverse" class="h-8 w-auto brightness-200" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDVz9eGhycuTRORC1w4ysTp9C8a8zG3roG_ZSW7PaDXF5phGHKFNmU7_9Q1zOrUQVmimqHyyXWajKvIkmXMHjA_SHJ0Zd6oMaOR98S6X0iSNBD60cdbAJWl_XlwJAc82wSf-RR2p8z_6-_TkuYg7LJ0wNXUV9_4bAprPo_xVbVLxZtKllJGhBiSqzjIJJwLKnbxKLWQenxpE3XIefRRl759xOpf2j2oURnsPHr5midaDnGqUCYRYxU7y7yvgiMcsxtNkiii6slaDo"/>
+
 <span class="font-headline-md text-headline-md font-bold text-surface-container-lowest">Izate Consulting 360</span>
 </div>
 <p class="text-surface-variant/70 max-w-sm">Soluciones avanzadas en consultoría técnica y jurídica para empresas del siglo XXI.</p>
@@ -428,4 +507,50 @@
             }, 600);
         });
     </script>
+
+<!-- MODAL CONTACTO -->
+<div id="contactModal">
+    <div class="modal-content">
+        <button class="close-modal" id="closeModal">&times;</button>
+        <h2>Cuéntanos tu caso</h2>
+        <form id="contactForm" class="main-form">
+            <input type="text" name="nombre" placeholder="Nombre completo" required>
+            <input type="email" name="email" placeholder="Correo electrónico" required>
+            <select name="tipo_consulta" required>
+                <option value="" disabled selected>Tipo de consulta</option>
+                <option value="juridica">Duda Jurídica</option>
+                <option value="tecnica">Duda Técnica</option>
+                <option value="360">Consultoría 360 (Ambas)</option>
+            </select>
+            <textarea name="mensaje" placeholder="Describe tu caso o consulta" rows="5" required></textarea>
+            <button type="submit" class="submit-btn">ENVIAR</button>
+        </form>
+        <div id="formSuccess" class="form-success">
+            <h3>¡Consulta enviada!</h3>
+            <p>Gracias por contactarnos. Te responderemos lo antes posible.</p>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Modal open/close
+    const modal = document.getElementById('contactModal');
+    document.getElementById('openModal').addEventListener('click', () => modal.classList.add('active'));
+    document.getElementById('closeModal').addEventListener('click', () => modal.classList.remove('active'));
+    modal.addEventListener('click', e => { if (e.target === modal) modal.classList.remove('active'); });
+
+    // Form submit simulation
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        this.style.display = 'none';
+        document.getElementById('formSuccess').style.display = 'block';
+        setTimeout(() => {
+            this.style.display = 'flex';
+            document.getElementById('formSuccess').style.display = 'none';
+            this.reset();
+            modal.classList.remove('active');
+        }, 3000);
+    });
+</script>
+
 </body></html>

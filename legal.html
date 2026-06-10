@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Legal — Izate Consulting 360</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Cabin:wght@400;600;700&display=swap" rel="stylesheet"/>
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #F8F8F8;
+            color: #1c1b1b;
+            line-height: 1.7;
+        }
+
+        /* NAV */
+        nav {
+            position: sticky;
+            top: 0;
+            background: #fff;
+            border-bottom: 1px solid #E2E8F0;
+            z-index: 100;
+            padding: 0 40px;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .nav-logo {
+            font-family: 'Cabin', sans-serif;
+            font-weight: 700;
+            font-size: 16px;
+            color: #2F4853;
+            text-decoration: none;
+        }
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
+        .nav-links a {
+            font-size: 13px;
+            font-weight: 600;
+            color: #4a626d;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .nav-links a:hover { color: #2F4853; }
+
+        /* HERO */
+        .hero {
+            background: #1e2e35;
+            padding: 64px 40px;
+            text-align: center;
+        }
+        .hero h1 {
+            font-family: 'Cabin', sans-serif;
+            font-size: 36px;
+            font-weight: 700;
+            color: #EAE0D5;
+            margin-bottom: 12px;
+        }
+        .hero p {
+            font-size: 14px;
+            color: rgba(255,255,255,0.5);
+        }
+
+        /* TAB NAV */
+        .tab-nav {
+            display: flex;
+            border-bottom: 2px solid #E2E8F0;
+            background: #fff;
+            padding: 0 40px;
+            gap: 0;
+        }
+        .tab-nav a {
+            padding: 16px 24px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #4a626d;
+            text-decoration: none;
+            border-bottom: 2px solid transparent;
+            margin-bottom: -2px;
+            transition: all 0.2s;
+        }
+        .tab-nav a:hover,
+        .tab-nav a.active { color: #2F4853; border-bottom-color: #2F4853; }
+
+        /* CONTENT */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 64px 40px;
+        }
+
+        .legal-section {
+            margin-bottom: 80px;
+        }
+
+        .legal-section h2 {
+            font-family: 'Cabin', sans-serif;
+            font-size: 26px;
+            font-weight: 700;
+            color: #2F4853;
+            margin-bottom: 32px;
+            padding-bottom: 16px;
+            border-bottom: 2px solid #EAE0D5;
+        }
+
+        .legal-section h3 {
+            font-family: 'Cabin', sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            color: #2F4853;
+            margin: 32px 0 12px;
+        }
+
+        .legal-section p {
+            font-size: 14px;
+            color: #434655;
+            margin-bottom: 12px;
+        }
+
+        .legal-section ul {
+            margin: 12px 0 16px 20px;
+            font-size: 14px;
+            color: #434655;
+        }
+        .legal-section ul li { margin-bottom: 6px; }
+
+        .data-box {
+            background: #f0efed;
+            border-left: 4px solid #2F4853;
+            border-radius: 0 8px 8px 0;
+            padding: 20px 24px;
+            margin: 20px 0;
+            font-size: 14px;
+            color: #434655;
+        }
+        .data-box strong { color: #2F4853; display: block; margin-bottom: 4px; }
+
+        .highlight {
+            background: #EAE0D5;
+            border-radius: 8px;
+            padding: 16px 20px;
+            margin: 16px 0;
+            font-size: 13px;
+            color: #2F4853;
+        }
+
+        .last-update {
+            font-size: 12px;
+            color: #737686;
+            margin-top: 48px;
+            padding-top: 24px;
+            border-top: 1px solid #E2E8F0;
+        }
+
+        /* FOOTER */
+        footer {
+            background: #1e2e35;
+            color: rgba(255,255,255,0.5);
+            text-align: center;
+            padding: 32px 40px;
+            font-size: 12px;
+        }
+        footer a {
+            color: #EAE0D5;
+            text-decoration: none;
+        }
+        footer a:hover { text-decoration: underline; }
+
+        @media (max-width: 768px) {
+            nav { padding: 0 20px; }
+            .hero { padding: 48px 20px; }
+            .hero h1 { font-size: 26px; }
+            .tab-nav { padding: 0 20px; }
+            .container { padding: 48px 20px; }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <a href="index.html" class="nav-logo">← Izate Consulting 360</a>
+    <ul class="nav-links">
+        <li><a href="#aviso-legal">Aviso Legal</a></li>
+        <li><a href="#politica-privacidad">Privacidad</a></li>
+    </ul>
+</nav>
+
+<div class="hero">
+    <h1>Información Legal</h1>
+    <p>Aviso Legal y Política de Privacidad de Izate Consulting 360</p>
+</div>
+
+<div class="tab-nav">
+    <a href="#aviso-legal">Aviso Legal</a>
+    <a href="#politica-privacidad">Política de Privacidad</a>
+</div>
+
+<div class="container">
+
+    <!-- ── AVISO LEGAL ── -->
+    <section class="legal-section" id="aviso-legal">
+        <h2>Aviso Legal</h2>
+
+        <h3>1. Datos identificativos del titular</h3>
+        <p>En cumplimiento de la Ley 34/2002, de 11 de julio, de Servicios de la Sociedad de la Información y Comercio Electrónico (LSSI-CE), se informa de los datos identificativos del titular de este sitio web:</p>
+
+        <div class="data-box">
+            <strong>Razón social:</strong> Izate Consulting 360
+            <strong style="margin-top:10px;">NIF/CIF:</strong> [INTRODUCIR NIF/CIF]
+            <strong style="margin-top:10px;">Domicilio:</strong> [INTRODUCIR DIRECCIÓN FISCAL]
+            <strong style="margin-top:10px;">Correo electrónico:</strong> hola@izate.es
+            <strong style="margin-top:10px;">Sitio web:</strong> www.izate.es
+        </div>
+
+        <h3>2. Objeto y ámbito de aplicación</h3>
+        <p>El presente Aviso Legal regula el acceso y uso del sitio web de Izate Consulting 360, así como los servicios de información y consultoría disponibles a través del mismo. El acceso al sitio implica la aceptación plena de las presentes condiciones.</p>
+
+        <h3>3. Propiedad intelectual e industrial</h3>
+        <p>Todos los contenidos del sitio web — incluyendo textos, imágenes, logotipos, diseño gráfico, código fuente y cualquier otro elemento — son propiedad de Izate Consulting 360 o de terceros que han autorizado su uso, y están protegidos por la legislación vigente en materia de propiedad intelectual e industrial.</p>
+        <p>Queda expresamente prohibida la reproducción, distribución, comunicación pública o transformación de cualquier contenido sin autorización expresa y por escrito del titular.</p>
+
+        <h3>4. Responsabilidad</h3>
+        <p>Izate Consulting 360 no se hace responsable de los daños o perjuicios que pudieran derivarse del uso de la información contenida en este sitio, de posibles errores en los contenidos, ni del acceso a sitios de terceros enlazados desde esta web.</p>
+        <p>El titular se reserva el derecho a modificar, suspender o interrumpir el acceso al sitio sin previo aviso.</p>
+
+        <h3>5. Legislación aplicable y jurisdicción</h3>
+        <p>Las presentes condiciones se rigen por la legislación española. Para la resolución de cualquier controversia, las partes se someten a los juzgados y tribunales del domicilio del titular, salvo que la normativa aplicable establezca otro fuero.</p>
+
+        <p class="last-update">Última actualización: junio de 2026</p>
+    </section>
+
+    <!-- ── POLÍTICA DE PRIVACIDAD ── -->
+    <section class="legal-section" id="politica-privacidad">
+        <h2>Política de Privacidad</h2>
+
+        <div class="highlight">
+            En Izate Consulting 360 nos comprometemos a proteger tu privacidad y tratar tus datos personales con pleno respeto al Reglamento General de Protección de Datos (RGPD) y a la Ley Orgánica 3/2018 (LOPDGDD).
+        </div>
+
+        <h3>1. Responsable del tratamiento</h3>
+        <div class="data-box">
+            <strong>Identidad:</strong> Izate Consulting 360
+            <strong style="margin-top:10px;">NIF/CIF:</strong> [INTRODUCIR NIF/CIF]
+            <strong style="margin-top:10px;">Dirección:</strong> [INTRODUCIR DIRECCIÓN FISCAL]
+            <strong style="margin-top:10px;">Correo:</strong> hola@izate.es
+        </div>
+
+        <h3>2. Datos que recogemos</h3>
+        <p>A través de este sitio web podemos recoger los siguientes datos personales:</p>
+        <ul>
+            <li><strong>Formulario de contacto y chat:</strong> nombre, teléfono, correo electrónico y descripción de la consulta.</li>
+            <li><strong>Datos de navegación:</strong> dirección IP, tipo de navegador, páginas visitadas y tiempo de visita, a través de servicios técnicos necesarios para el funcionamiento del sitio.</li>
+        </ul>
+
+        <h3>3. Finalidad del tratamiento</h3>
+        <ul>
+            <li>Gestionar y responder a las consultas recibidas a través del formulario de contacto y el chat.</li>
+            <li>Asignar tu consulta al especialista más adecuado de nuestro equipo.</li>
+            <li>Garantizar el correcto funcionamiento técnico del sitio web.</li>
+        </ul>
+
+        <h3>4. Base legal</h3>
+        <p>El tratamiento de tus datos se basa en el <strong>consentimiento</strong> que otorgas al enviar tu consulta a través del formulario o el chat, de conformidad con el artículo 6.1.a) del RGPD.</p>
+
+        <h3>5. Plazo de conservación</h3>
+        <p>Tus datos se conservarán durante el tiempo necesario para atender tu consulta y, en todo caso, durante los plazos legalmente exigidos. Una vez finalizada la relación, los datos serán suprimidos o anonimizados.</p>
+
+        <h3>6. Destinatarios y transferencias internacionales</h3>
+        <p>Tus datos pueden ser comunicados a los siguientes terceros proveedores de servicios técnicos necesarios para el funcionamiento del sitio:</p>
+        <ul>
+            <li><strong>EmailJS</strong> (emailjs.com) — servicio de envío de correos electrónicos. Puede implicar transferencia de datos fuera del Espacio Económico Europeo. Consulta su política en emailjs.com/legal.</li>
+            <li><strong>Formspree</strong> (formspree.io) — procesamiento de formularios. Consulta su política en formspree.io/legal/privacy-policy.</li>
+            <li><strong>Google LLC</strong> — a través de Google Fonts, cargado desde sus servidores. Consulta su política en policies.google.com/privacy.</li>
+            <li><strong>Cloudinary</strong> — almacenamiento y entrega de contenido multimedia. Consulta su política en cloudinary.com/privacy.</li>
+        </ul>
+        <p>Izate Consulting 360 no vende ni cede tus datos personales a terceros con fines comerciales.</p>
+
+        <h3>7. Tus derechos</h3>
+        <p>Puedes ejercer en cualquier momento los siguientes derechos:</p>
+        <ul>
+            <li><strong>Acceso:</strong> conocer qué datos tuyos tratamos.</li>
+            <li><strong>Rectificación:</strong> corregir datos inexactos o incompletos.</li>
+            <li><strong>Supresión:</strong> solicitar la eliminación de tus datos.</li>
+            <li><strong>Oposición:</strong> oponerte al tratamiento de tus datos.</li>
+            <li><strong>Limitación:</strong> solicitar que suspendamos el tratamiento.</li>
+            <li><strong>Portabilidad:</strong> recibir tus datos en formato estructurado.</li>
+        </ul>
+        <p>Para ejercer estos derechos, dirígete a: <a href="mailto:hola@izate.es" style="color:#2F4853;font-weight:600;">hola@izate.es</a></p>
+        <p>También tienes derecho a presentar una reclamación ante la <strong>Agencia Española de Protección de Datos</strong> (www.aepd.es) si consideras que el tratamiento de tus datos no es conforme a la normativa.</p>
+
+        <h3>8. Cookies</h3>
+        <p>Este sitio utiliza cookies técnicas propias necesarias para su funcionamiento, así como cookies de terceros derivadas de los servicios indicados en el apartado anterior. Al continuar navegando, aceptas su uso conforme a lo indicado en el aviso de cookies.</p>
+
+        <p class="last-update">Última actualización: junio de 2026</p>
+    </section>
+
+</div>
+
+<footer>
+    <p>© 2026 Izate Consulting 360 · <a href="mailto:hola@izate.es">hola@izate.es</a></p>
+</footer>
+
+</body>
+</html>

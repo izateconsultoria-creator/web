@@ -258,9 +258,60 @@
         .form-success { display: none; text-align: center; padding: 1rem 0; }
         .form-success h3 { color: #2F4853; font-family: 'Cabin', sans-serif; font-size: 1.2rem; margin-bottom: 0.5rem; }
         .form-success p { color: #7A8F99; font-size: 0.9rem; }
+        #agent-panel {
+    flex-shrink: 0;
+
+
+    
+}
+
+#cookie-notice {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 99998;
+    background: #1e2e35;
+    color: rgba(255,255,255,0.7);
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    padding: 14px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    opacity: 0;
+    transform: translateY(100%);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+#cookie-notice.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+#cookie-btn {
+    background: #EAE0D5;
+    color: #2F4853;
+    border: none;
+    border-radius: 6px;
+    padding: 7px 18px;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: opacity 0.2s;
+    flex-shrink: 0;
+}
+#cookie-btn:hover { opacity: 0.85; }
     </style>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>emailjs.init('L8xfY_fpM2Jkny6XN');</script>
 </head>
 <body class="bg-background text-on-surface font-body-md overflow-x-hidden">
+    <div id="cookie-notice" style="display:none;">
+    <span>Este sitio usa cookies propias y de terceros para su funcionamiento. Si continúas navegando, aceptas su uso.</span>
+    <button id="cookie-btn">Entendido</button>
+</div>
 <nav class="bg-surface/80 dark:bg-on-background/80 font-body-md text-body-md docked full-width top-0 sticky z-50 backdrop-blur-md border-b border-border-subtle dark:border-outline-variant shadow-sm h-20">
 <div class="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto h-full">
 <div class="flex items-center gap-3">
@@ -346,7 +397,7 @@
 <div class="flex flex-col lg:flex-row h-full overflow-hidden" id="expanded-view">
 
 <!-- Agentes -->
-<div class="w-full border-b lg:border-b-0 lg:border-r border-white/10 bg-white/5 flex flex-col gap-6 lg:w-1/4 p-5" id="agent-panel">
+<div class="w-full border-b lg:border-b-0 lg:border-r border-white/10 bg-white/5 flex flex-col gap-6 lg:w-1/4 p-5 shrink-0" id="agent-panel">
 <div class="space-y-2">
 <h3 class="text-white font-headline-md text-lg">Selecciona un Especialista</h3>
 <p class="text-surface-variant/70 text-xs leading-relaxed">Elige al agente experto en tu área.</p>
@@ -369,7 +420,7 @@
 </div>
 <div class="flex flex-col">
 <span class="text-white font-semibold text-xs">Axel</span>
-<span class="text-white/40 text-[10px]">Derecho Civil</span>
+<span class="text-white/40 text-[10px]">Derecho Civil y Peritajes</span>
 </div>
 </button>
 
@@ -378,7 +429,7 @@
 <span class="material-symbols-outlined text-xl">request_quote</span>
 </div>
 <div class="flex flex-col">
-<span class="text-white font-semibold text-xs">Mili</span>
+<span class="text-white font-semibold text-xs">Virginia</span>
 <span class="text-white/40 text-[10px]">Financiación</span>
 </div>
 </button>
@@ -388,8 +439,8 @@
 <span class="material-symbols-outlined text-xl">badge</span>
 </div>
 <div class="flex flex-col">
-<span class="text-white font-semibold text-xs">Denis</span>
-<span class="text-white/40 text-[10px]">Asesoría Laboral</span>
+<span class="text-white font-semibold text-xs">Carlos</span>
+<span class="text-white/40 text-[10px]">Tasación e Inmobiliario</span>
 </div>
 </button>
 
@@ -399,7 +450,7 @@
 </div>
 <div class="flex flex-col">
 <span class="text-white font-semibold text-xs">César</span>
-<span class="text-white/40 text-[10px]">Construcción</span>
+<span class="text-white/40 text-[10px]">Arquitectura y Construcción</span>
 </div>
 </button>
 
@@ -542,13 +593,12 @@
 </div>
 <div class="flex flex-col md:items-end gap-6">
 <div class="flex flex-wrap gap-x-gutter gap-y-2">
-<a class="text-surface-variant/70 hover:text-surface-container-lowest transition-colors hover:underline decoration-primary-fixed-dim" href="#">Aviso Legal</a>
-<a class="text-surface-variant/70 hover:text-surface-container-lowest transition-colors hover:underline decoration-primary-fixed-dim" href="#">Política de Privacidad</a>
-<a class="text-surface-variant/70 hover:text-surface-container-lowest transition-colors hover:underline decoration-primary-fixed-dim" href="#">Cookies</a>
-<a class="text-surface-variant/70 hover:text-surface-container-lowest transition-colors hover:underline decoration-primary-fixed-dim" href="#">LinkedIn</a>
-<a class="text-surface-variant/70 hover:text-surface-container-lowest transition-colors hover:underline decoration-primary-fixed-dim" href="#">Twitter</a>
+<a class="text-surface-variant/70 hover:text-surface-container-lowest transition-colors hover:underline decoration-primary-fixed-dim" href="legal.html#aviso-legal">Aviso Legal</a>
+<a class="text-surface-variant/70 hover:text-surface-container-lowest transition-colors hover:underline decoration-primary-fixed-dim" href="legal.html#politica-privacidad">Política de Privacidad</a>
+<a class="text-surface-variant/70 hover:text-surface-container-lowest transition-colors hover:underline decoration-primary-fixed-dim" href="#">LinkedIn</a>  
+<a class="text-surface-variant/70 hover:text-surface-container-lowest transition-colors hover:underline decoration-primary-fixed-dim" href="https://www.instagram.com/izate360/">Instagram</a>
 </div>
-<p class="text-surface-variant/50">© 2024 Izate Consulting 360. Todos los derechos reservados.</p>
+<p class="text-surface-variant/50">© 2026 Izate Consulting 360. Todos los derechos reservados.</p>
 </div>
 </div>
 </footer>

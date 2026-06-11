@@ -133,7 +133,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (chatWrapper && chatInput && chatForm) {
 
-        let estado  = 'inicio';
+        let estado           = 'inicio';
+        let intentosConsulta = 0;
         let consulta = { problema: '', especialista: '', nombre: '', telefono: '', correo: '' };
 
         const correosEspecialistas = {
@@ -144,10 +145,25 @@ document.addEventListener('DOMContentLoaded', () => {
             'Asistente General':'hola@izate.es',
         };
 
+        const DESVIOS = ['hola','hey','hi','como estas','que tal','otra consulta','nueva consulta','quiero otra','cambiar','espera','un momento','antes','primero','buenas','buenos dias','buenas tardes','gracias'];
+
+        const AGENTES_MAP = {
+            'axel':     'Axel',
+            'virginia': 'Virginia',
+            'carlos':   'Carlos',
+            'césar':    'César',
+            'cesar':    'César',
+        };
+
         function normalizar(texto) {
             return texto.toLowerCase()
                 .normalize('NFD')
                 .replace(/[\u0300-\u036f]/g, '');
+        }
+
+        function esDesvio(texto) {
+            const t = normalizar(texto);
+            return DESVIOS.some(d => t.includes(normalizar(d)));
         }
 
         const palabrasClave = {
@@ -206,6 +222,13 @@ document.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => { d.remove(); cb(); }, 900);
         }
 
+        function activarTarjetaAgente(nombreReal) {
+            agentCards.forEach(card => {
+                const n = card.querySelector('span.font-semibold')?.textContent;
+                card.classList.toggle('active', n === nombreReal);
+            });
+        }
+
         function mostrarBotonNuevaConsulta() {
             setTimeout(() => {
                 const d = document.createElement('div');
@@ -216,6 +239,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 document.getElementById('nueva-consulta').addEventListener('click', () => {
                     estado = 'inicio';
+                    intentosConsulta = 0;
                     consulta = { problema: '', especialista: '', nombre: '', telefono: '', correo: '' };
                     chatInput.disabled = false;
                     chatInput.placeholder = 'En qué podemos ayudarte...';
@@ -245,39 +269,116 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         function procesarMensaje(texto) {
+            const t = normalizar(texto);
+
+            // ── Detectar nombre de agente en cualquier momento ──
+            const nombreDetectado = Object.keys(AGENTES_MAP).find(n => t.includes(n));
+            if (nombreDetectado) {
+                const nombreReal = AGENTES_MAP[nombreDetectado];
+                activarTarjetaAgente(nombreReal);
+
+                if (estado !== 'inicio') {
+                    estado = 'inicio';
+                    intentosConsulta = 0;
+                    consulta = { problema: '', especialista: nombreReal, nombre: '', telefono: '', correo: '' };
+                    chatInput.disabled = false;
+                    chatInput.placeholder = 'En qué podemos ayudarte...';
+                    typing(() => addBot(`Has cambiado a <strong>${nombreReal}</strong>. Tu consulta anterior se ha reiniciado. Cuéntame tu nuevo caso cuando quieras.`));
+                } else {
+                    consulta.especialista = nombreReal;
+                    typing(() => addBot(`Perfecto, hablarás con <strong>${nombreReal}</strong>. Cuéntame con detalle tu caso.`));
+                }
+                return;
+            }
+
             switch (estado) {
-                case 'inicio':
-    // Validación mínima
-    const soloRuido = /^[^a-záéíóúüña-z\s]{0,}$/i.test(texto);
-    const muyCorto  = normalizar(texto).replace(/\s/g,'').length < 4;
-    const sinVocales = (texto.match(/[aeiouáéíóúü]/gi) || []).length === 0;
+                case 'inicio': {
 
-    if (muyCorto || soloRuido || sinVocales) {
-        typing(() => addBot('No me ha quedado claro. ¿Podrías ser más específico con tu consulta? Por ejemplo: <em>"necesito tasar un piso"</em> o <em>"tengo un problema con una herencia"</em>.'));
-        break;
-    }
+                    // ── 1. Detectar saludos y frases cortas sin consulta ──
+                    const saludos = ['hola','buenas','buenos dias','buenas tardes','buenas noches','hey','hi','ola','good morning','hello','como estas','como estás','que tal','qué tal','bien','todo bien','muy bien','gracias','ok','vale','si','no','claro','perfecto','genial','estupendo','de acuerdo','entendido','ok gracias'];
+                    const esSaludo = saludos.some(s => t.trim() === normalizar(s));
+                    if (esSaludo) {
+                        typing(() => addBot('Hola 👋 Encantada. Para ayudarte necesito que me cuentes tu caso. ¿Cuál es tu consulta?'));
+                        break;
+                    }
 
-    consulta.problema = texto;
-    if (!consulta.especialista) {
-        consulta.especialista = detectarEspecialista(texto);
-    }
-    estado = 'pedir_nombre';
-    typing(() => addBot(`Entendido. Tomaré tus datos para que <strong>${consulta.especialista}</strong> pueda contactarte. ¿Cuál es tu nombre completo?`));
-    break;
+                    // ── 2. Validación mínima ──
+                    const soloRuido  = /^[^a-záéíóúüñ\s]+$/i.test(texto);
+                    const muyCorto   = t.replace(/\s/g,'').length < 4;
+                    const sinVocales = (texto.match(/[aeiouáéíóúü]/gi) || []).length === 0;
 
-                case 'pedir_nombre':
+                    if (muyCorto || soloRuido || sinVocales) {
+                        typing(() => addBot('No me ha quedado claro. ¿Podrías ser más específico? Por ejemplo: <em>"necesito tasar un piso"</em> o <em>"tengo un problema con una herencia"</em>.'));
+                        break;
+                    }
+
+                    // ── 3. Palabras de confirmación ──
+                    const confirma = ['listo','eso es todo','ya','eso es','termine','es todo','nada mas','fin'];
+                    const confirmando = confirma.some(c => t.includes(c));
+
+                    // ── 4. Consulta corta — pide más detalle (solo 1 vez) ──
+                    if (intentosConsulta === 0 && texto.trim().split(' ').length < 5 && !confirmando) {
+                        intentosConsulta++;
+                        consulta.problema = texto;
+                        typing(() => addBot('Entendido. ¿Puedes darme algo más de detalle sobre tu caso? Cuando termines escribe <strong>"listo"</strong> o simplemente continúa.'));
+                        break;
+                    }
+
+                    // ── 5. Segunda vuelta o confirmación — acumula y avanza ──
+                    if (intentosConsulta > 0 && !confirmando) {
+                        consulta.problema += ' ' + texto;
+                    } else if (intentosConsulta === 0) {
+                        consulta.problema = texto;
+                    }
+
+                    intentosConsulta = 0;
+
+                    if (!consulta.especialista) {
+                        consulta.especialista = detectarEspecialista(consulta.problema);
+                    }
+
+                    estado = 'pedir_nombre';
+                    typing(() => addBot(`Entendido. Tomaré tus datos para que <strong>${consulta.especialista}</strong> pueda contactarte. ¿Cuál es tu nombre completo?`));
+                    break;
+                }
+
+                case 'pedir_nombre': {
+                    if (esDesvio(texto) || texto.trim().split(' ').length < 2) {
+                        typing(() => addBot(`Terminemos esta consulta primero 😊 ¿Cuál es tu nombre completo?`));
+                        break;
+                    }
                     consulta.nombre = texto;
                     estado = 'pedir_telefono';
                     typing(() => addBot(`Gracias, <strong>${consulta.nombre}</strong>. ¿Tu número de teléfono?`));
                     break;
+                }
 
-                case 'pedir_telefono':
+                case 'pedir_telefono': {
+                    if (esDesvio(texto)) {
+                        typing(() => addBot(`Casi terminamos 😊 Solo necesito tu teléfono para poder contactarte.`));
+                        break;
+                    }
+                    const soloNumeros = /[\d\s\+\-\.]{6,}/.test(texto);
+                    if (!soloNumeros) {
+                        typing(() => addBot('No reconozco ese número. ¿Podrías escribir tu teléfono de contacto?'));
+                        break;
+                    }
                     consulta.telefono = texto;
                     estado = 'pedir_correo';
                     typing(() => addBot('Perfecto. Por último, ¿tu correo electrónico?'));
                     break;
+                }
 
-                case 'pedir_correo':
+                case 'pedir_correo': {
+                    if (esDesvio(texto)) {
+                        typing(() => addBot(`Ya casi 😊 Solo necesito tu correo electrónico para finalizar.`));
+                        break;
+                    }
+                    const esEmail = /\S+@\S+\.\S+/.test(texto);
+                    if (!esEmail) {
+                        typing(() => addBot('Ese correo no parece válido. ¿Podrías escribirlo de nuevo? Ejemplo: <em>nombre@correo.com</em>'));
+                        break;
+                    }
                     consulta.correo = texto;
                     estado = 'enviado';
                     chatInput.disabled    = true;
@@ -287,6 +388,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         setTimeout(enviarEmail, 1200);
                     });
                     break;
+                }
             }
         }
 
@@ -315,22 +417,30 @@ document.addEventListener('DOMContentLoaded', () => {
             procesarMensaje(texto);
         });
 
+        // ── AGENTES — cambio manual por tarjeta ──
         agentCards.forEach(card => {
             card.addEventListener('click', () => {
                 agentCards.forEach(c => c.classList.remove('active'));
                 card.classList.add('active');
                 const nombre = card.querySelector('span.font-semibold')?.textContent;
-                if (nombre && nombre !== 'Asistente General') {
+                if (!nombre || nombre === 'Asistente General') return;
+
+                if (estado !== 'inicio') {
+                    estado = 'inicio';
+                    intentosConsulta = 0;
+                    consulta = { problema: '', especialista: nombre, nombre: '', telefono: '', correo: '' };
+                    chatInput.disabled = false;
+                    chatInput.placeholder = 'En qué podemos ayudarte...';
+                    typing(() => addBot(`Has cambiado a <strong>${nombre}</strong>. Tu consulta anterior se ha reiniciado. Cuéntame tu nuevo caso cuando quieras.`));
+                } else {
                     consulta.especialista = nombre;
-                    if (estado === 'inicio') {
-                        typing(() => addBot(`Perfecto, hablarás con <strong>${nombre}</strong>. Cuéntame con detalle tu caso.`));
-                    }
+                    typing(() => addBot(`Perfecto, hablarás con <strong>${nombre}</strong>. Cuéntame con detalle tu caso.`));
                 }
             });
         });
     }
 
- // ── SCROLL REVEAL ──
+    // ── SCROLL REVEAL ──
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -366,5 +476,3 @@ window.addEventListener('load', () => {
         setTimeout(() => el.classList.add('is-visible'), index * 180);
     });
 });
-
-

@@ -1,0 +1,11 @@
+BEGIN:VCARD
+VERSION:3.0
+FN:José Manuel García Suárez
+N:García Suárez;José Manuel;;;
+ORG:izate
+TITLE:Arquitecto Técnico
+TEL;TYPE=CELL:+34636685496
+EMAIL;TYPE=WORK:jmgarcia@izate.es
+URL:https://izate.es
+ADR;TYPE=WORK:;;Calle Pintor Rosales 6;Colindres;Cantabria;39750;España
+END:VCARD
